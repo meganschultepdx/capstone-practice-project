@@ -1,11 +1,12 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet,
+  Text } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import InfoScreen from '../screens/InfoScreen';
+import WatchScreen from '../screens/WatchScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -21,56 +22,41 @@ const HomeStack = createStackNavigator(
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
 };
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const InfoStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Info: InfoScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
+InfoStack.navigationOptions = {
+  tabBarLabel: 'Movie Info',
 };
 
-LinksStack.path = '';
+InfoStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const WatchStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Watch: WatchScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
+WatchStack.navigationOptions = {
+  tabBarLabel: 'Where to Watch',
+  
 };
 
-SettingsStack.path = '';
+WatchStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  InfoStack ,
+  WatchStack,
 });
 
 tabNavigator.path = '';
